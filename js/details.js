@@ -9,29 +9,10 @@ const cors = "https://noroffcors.herokuapp.com/";
 
 const url = "www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
-// async function fetchUrl() {
-
-//     const respone = await fetch("https://imdb8.p.rapidapi.com/title/get-details?tconst=" + id, {
-//         "method": "GET",
-//         "headers": {
-//             "x-rapidapi-host": "imdb8.p.rapidapi.com",
-//             "x-rapidapi-key": "e97228322bmshf0be17d2a54bbf9p160588jsn50690065a659"
-//         }
-//     });
-//     const data = await respone.json();
-
-//     console.log(data);
-
-//     createHtml(data);
-// }
-
 async function fetchUrl() {
   const response = await fetch(cors + url + id);
   const json = await response.json();
-  console.log(json);
-
   const drinks = json.drinks;
-  console.log(drinks);
 
   createHtml(drinks);
 }
@@ -40,7 +21,7 @@ fetchUrl();
 
 function createHtml(drinks) {
   title.innerHTML = "Drink: " + drinks[0].strDrink;
-  loader.classList.remove("loader");
+  detailsContainer.innerHTML = "";
 
   detailsContainer.innerHTML += ` 
         <div class="drink-details"> 

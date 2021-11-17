@@ -1,66 +1,66 @@
-// const url = "https://imdb8.p.rapidapi.com/auto-complete?q=game%20of%20thr";
-
-// const apiKey = "e97228322bmshf0be17d2a54bbf9p160588jsn50690065a659";
-// const apiUrl = url + apiKey;
 const inputContainer = document.querySelector("#drink");
 const searchButton = document.querySelector("#search-button");
 const resultsContainer = document.querySelector(".results");
-
-// async function fetchUrl() {
-//     const searchValue = inputContainer.value;
-//     const respone = await fetch("https://imdb8.p.rapidapi.com/auto-complete?q=" + searchValue, {
-//         "method": "GET",
-//         "headers": {
-//             "x-rapidapi-host": "imdb8.p.rapidapi.com",
-//             "x-rapidapi-key": "e97228322bmshf0be17d2a54bbf9p160588jsn50690065a659"
-//         }
-//     });
-//     const json = await respone.json();
-//     const data = json.d;
-//     createHtml(data);
-//     console.log(data);
-// }
-
 const cors = "https://noroffcors.herokuapp.com/";
 
 const url = "www.thecocktaildb.com/api/json/v1/1/search.php?s=";
+// const url = "www.thecocktailssdb.com/api/json/v1/1/search.php?s=";
+const apiURL = cors + url;
+
+// async function getDataFromApi(resource) {
+//   try {
+//     const response = await fetch(`${apiURL}`);
+//     return await response.json();
+//   }
+// }
 
 async function fetchUrl() {
-  const respone = await fetch(cors + url);
-  const json = await respone.json();
-  console.log(json.drinks);
-  const drinks = json.drinks;
+  try {
+    const respone = await fetch(apiURL);
+    const json = await respone.json();
+    const drinks = json.drinks;
 
-  createHtml(drinks);
-}
-
-fetchUrl();
-
-function createHtml(drinks) {
-  const id = "";
-  resultsContainer.innerHTML = "";
-
-  for (let i = 0; i < drinks.length; i++) {
-    resultsContainer.innerHTML += `<a href="details.html?id=${drinks[i].idDrink}" class="drink"> 
-        <div> 
-        <img src=${drinks[i].strDrinkThumb}>
-        <h2> ${drinks[i].strDrink}</h2>
-     
-        <p>${drinks[i].strCategory}</p>
-        </div>
-        </a>`;
+    createHtml(drinks);
+  } catch (error) {
+    const theError = showError("error", `There was an error:<br>   ${error}`);
+    resultsContainer.innerHTML = theError;
   }
 }
 
-// searchButton.onclick = fetchUrl; lag ny søke funksjon
+function showError(type, message) {
+  const errorMessage = `<div class="${type}"> ${message} </div>`;
+  return errorMessage;
+}
+fetchUrl();
+
+function createHtml(drinks) {
+  resultsContainer.innerHTML = "";
+
+  for (let i = 0; i < drinks.length; i++) {
+    resultsContainer.innerHTML += `<a href="details.html?id=${drinks[i].idDrink}" class="drink" style="text-decoration:none"> 
+      <div> 
+      <img src=${drinks[i].strDrinkThumb}>
+      <h2> ${drinks[i].strDrink}</h2>
+      <h3>Drink Category: ${drinks[i].strCategory}</h3>
+      <h3> Type of glass: ${drinks[i].strGlass}</h3>
+      </div>
+      </a>`;
+  }
+}
+
+// searchButton.onclick = fetchUrl; lag ny søke funksjon og ved null results vis melding. og try catch med error melding
 
 async function searchForDrink() {
   const searchValue = inputContainer.value;
-  const respone = await fetch(cors + url + searchValue);
-  const json = await respone.json();
+  const response = await fetch(apiURL + searchValue);
+  const json = await response.json();
   const drinks = json.drinks;
-
-  createHtml(drinks);
+  resultsContainer.innerHTML = "";
+  if (drinks === null) {
+    resultsContainer.innerHTML = `<div class="no-results"> No results where found during your search....</div>`;
+  } else {
+    createHtml(drinks);
+  }
 }
 
 searchButton.onclick = searchForDrink;
