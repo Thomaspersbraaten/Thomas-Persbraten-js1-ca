@@ -10,36 +10,40 @@ const emailError = document.querySelector(".email-error");
 const addressError = document.querySelector(".address-error");
 
 function validateForm(event) {
-  event.preventDefault();
-
   if (checklength(nameContainer.value, 1)) {
     nameError.style.display = "none";
   } else {
     nameError.style.display = "block";
+    event.preventDefault();
   }
   if (checklength(subjectContainer.value, 10)) {
     subjectError.style.display = "none";
   } else {
     subjectError.style.display = "block";
+    event.preventDefault();
   }
   if (emailValidator(email.value)) {
     emailError.style.display = "none";
   } else {
     emailError.style.display = "block";
+    event.preventDefault();
   }
   if (checklength(addressContainer.value, 25)) {
     addressError.style.display = "none";
   } else {
     addressError.style.display = "block";
+    event.preventDefault();
   }
 }
 
-submitButton.addEventListener("submit", validateForm);
+// submitButton.addEventListener("submit", validateForm);
 
-nameContainer.addEventListener("keyup", validateForm);
-subjectContainer.addEventListener("keyup", validateForm);
-email.addEventListener("keyup", validateForm);
-addressContainer.addEventListener("keyup", validateForm);
+formContainer.addEventListener("submit", validateForm);
+
+// nameContainer.addEventListener("keyup", validateForm);
+// subjectContainer.addEventListener("keyup", validateForm);
+// email.addEventListener("keyup", validateForm);
+// addressContainer.addEventListener("keyup", validateForm);
 
 function checklength(value, len) {
   if (value.trim().length >= len) {
@@ -49,8 +53,17 @@ function checklength(value, len) {
   }
 }
 
+// function checklength(value, len) {
+//   if (value.trim().length >= len) {
+//     subjectError.style.display = "block";
+//   } else {
+//     subjectError.style.display = "none";
+//   }
+// }
+
 function emailValidator(email) {
-  const regEx = /\S+@\S+\.\S+/;
+  const regEx = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/;
   const patterMatches = regEx.test(email);
+  console.log(patterMatches);
   return patterMatches;
 }
