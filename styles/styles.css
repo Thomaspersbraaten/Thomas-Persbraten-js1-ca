@@ -1,3 +1,7 @@
+main {
+  text-align: center;
+}
+
 nav a {
   margin: 10px 50px;
   padding: 7px;
@@ -55,12 +59,12 @@ input {
   margin-top: 5px;
 }
 
-main form {
+#contact-form {
   padding: 2em;
   max-width: 760px;
   display: flex;
   flex-direction: column;
-  margin: 30px 10%;
+  margin: 30px auto;
   text-align: center;
   align-items: center;
   justify-content: center;
@@ -82,7 +86,7 @@ body {
   padding: 20px 40px;
 }
 
-#submit {
+.form-button {
   width: 100px;
   height: 50px;
   padding: 5px;
@@ -96,6 +100,7 @@ body {
   font-weight: bold;
   color: rgb(255, 0, 0);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-bottom: 10px;
 }
 
 .error {
@@ -117,10 +122,7 @@ img {
   color: black;
 }
 
-.results {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+.grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
@@ -140,6 +142,7 @@ img {
   border: 1px solid black;
   background-color: blanchedalmond;
   width: 100%;
+  padding: 10px;
 }
 
 .search label {
@@ -174,7 +177,18 @@ img {
 
 /* details */
 
+.details {
+  margin: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
 .drink-details {
+  max-width: 900px;
+  min-width: 600px;
   margin: auto;
   text-align: center;
   background-color: rgb(153, 202, 202);
@@ -186,5 +200,28 @@ img {
 
 h2 {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 2.7em;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.ingredients {
+  background-color: antiquewhite;
+  margin: auto;
+  padding: 20px;
+  margin: 20px;
+  text-align: center;
+  max-width: 900px;
+}
+
+/* contact   */
+
+.message {
+  background-color: rgb(0, 255, 0);
+  color: black;
   font-size: 2em;
+  font-weight: bold;
+  width: 80%;
+  margin: 20px;
+  border-radius: 20px;
 }

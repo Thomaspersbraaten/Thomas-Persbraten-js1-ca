@@ -24,7 +24,8 @@
       </nav>
     </header>
     <main>
-      <form>
+      <form id="contact-form">
+        <div class="message"></div>
         <div>
           <label for="name">Full Name</label>
           <input type="text" name="name" id="name" placeholder="Full Name" />
@@ -58,11 +59,11 @@
             placeholder="Address"
           />
           <div class="address-error error-message">
-            Please input a valid address
+            Please input a valid address (at least 25 characters)
           </div>
         </div>
 
-        <button id="submit">Submit</button>
+        <button class="form-button">Submit</button>
       </form>
     </main>
     <script src="js/contact.js"></script>
