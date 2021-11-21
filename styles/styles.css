@@ -97,7 +97,6 @@ body {
 
 .error-message {
   display: none;
-  font-weight: bold;
   color: rgb(255, 0, 0);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin-bottom: 10px;
